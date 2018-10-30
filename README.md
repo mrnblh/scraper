@@ -40,9 +40,6 @@ Activate the created virtual environment:
 Install dependencies using the following command:
 * `$ pip install -r requirements.txt`
 
-Or run:
-* `$ pipenv install request`
-
 Set up variable connecting the flask app to the app python script as follows:
 * windows: `$ set FLASK_APP=app.py`
 * linux/macos: `$ export FLASK_APP=app.py`
