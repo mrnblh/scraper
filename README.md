@@ -3,7 +3,7 @@
 ### How it works
 
 The application accepts HTTP GET requests of the form:
-* `GET localhost:5000/url/https://www.bbc.com/news`
+* `GET http://localhost:5000/info?url=https://www.bbc.com/news`
 
 The application response will be of the form:
 
