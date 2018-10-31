@@ -2,12 +2,13 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 from bs4 import BeautifulSoup
+from flask import request
 import requests
 
 
-@app.route('/url/<path:url_requested>')
-def scrape_url(url_requested):
-
+@app.route('/info', methods=['GET'])
+def scrape_url():
+	url_requested = request.args.get('url')
 	parser = Parser()
 	response = parser.parse_url(url_requested)
 
@@ -104,5 +105,5 @@ class Parser:
 		return result
 
 if __name__ == '__main__':
-	app = create_app(debug=False)
+	app = create_app(debug=True)
 	app.run()

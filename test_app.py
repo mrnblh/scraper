@@ -10,18 +10,18 @@ def client():
 
 
 def test_client_invalid_url(client):
-    rv = client.get('/url/afcnjof')
+    rv = client.get('/info?url=afcnjof')
     response = rv.get_json()
     assert response['head']['status'] == 'Failed'
 
 
 def test_client_incomplete_url(client):
-    rv = client.get('/url/https://www.bbc.com/')
+    rv = client.get('/info?url=https://www.bbc.com/')
     response = rv.get_json()
     assert response['head']['status'] == 'Incomplete'
 
 
 def test_client_complete_url(client):
-    rv = client.get('/url/https://www.bbc.com/news')
+    rv = client.get('/info?url=https://www.bbc.com/news')
     response = rv.get_json()
     assert response['head']['status'] == 'Complete'
