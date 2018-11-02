@@ -3,7 +3,7 @@
 ### How it works
 
 The application accepts HTTP GET requests of the form:
-* `GET http://localhost:8000/info?url=[requested_url]`
+* `GET http://localhost:5000/info?url=[requested_url]`
 
 The application response will be of the form:
 
