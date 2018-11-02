@@ -54,9 +54,13 @@ To run the example functional tests, run the command `$ pytest`. While the tests
 ### Deployment on AWS/GCE and relative technologies
 
 **DNS -** Before deployment, we would need to buy and setup a domain name to point to our server.
+
 **WSGI server -** Flask’s built-in server is not suitable for production as it doesn’t scale well, therefore we need to choose a WSGI HTTP Server option. Gunicorn is a pre-fork worker model widely adopted by the community. Other then supporting eventlet and greenlet, it makes running a Flask application on multiple asynchronous processes quite simple.
+
 **Proxy server -** It is best to use Gunicorn behind an HTTP proxy server, especially to handle slow clients. Nginx is one of the most common solutions. It enjoys much lower costs per client and doesn't suffer a penalty for handling slow clients, making it an advantageous solution both as a buffer and load balancer server.
+
 **Virtualization -** The simplest way to easily deploy the service on AWS/GCE would be to dockerize Nginx, Gunicorn and Flask app using Docker and handle containers' orchestration using Kubernetes. Docker containers are particularly convenient because they allow us to pack and isolate each of our services with everything they need to run, without the burden of full virtualization (VMs).
+
 **Production-ready -** A minimal list of tasks we need to implement before launching our service in production: (I) add caching as to avoid repeating queries to domains recently interrogated. MongoDB would be a good DB solution, providing both performances at scale and flexible data schema definition; (II) add a logging service along with its own log DB. At a global level, AWS and GCE already gives us many performance measures. At the opposite extreme, Flask custom Logger would give us the ability to measure performances at a much more fine-grained level, paying this advantage in terms of complexity; (III) add authentication in order to have control and potentially limit the number of queries performed by a single phisical entity; (IV) write integration tests; (V) automatically build documentation using tools like Sphinx or Pycco in order to make the app easier to mantain; (VI) set up a staging and production environments, along with a CI tool like Travis allowing us to automatically perform tests and deploy new features quickly and safely.
 
 ### Scale up to thousands QPS
